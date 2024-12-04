@@ -1,6 +1,6 @@
 class Money {
     constructor() {
-        
+        this.money = 0;
     }
 }
 
