@@ -1,0 +1,7 @@
+.image-container {
+    display: inline-block;
+    transition: transform 0.5s ease; /* 回転のアニメーション */
+}
+.image-container.rotated {
+    transform: rotate(360deg); /* 360度回転 */
+}

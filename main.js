@@ -1,93 +1,20 @@
-class Money {
-    constructor() {
-        this.money = 0;
-        this.input_money = 0;
-    }
+console.log("hello")
+let minigame = new MiniGame();
+let gacha = new Gacha();
 
-    check() {
-        return this.money
-    }
-}
-
-class Gacha {
-    constructor() {
-        this.money_class = Money();
-        this.rotate_sound = null;
-        this.discharge_sound = null;
-        this.rarity_list = null;
-        this.design = null;
-        this.items = [Item(),Item(),Item(),Item()];
-    }
-
-    
-    change_design() {
+function MiniGameStart() {
+    console.log("MiniGameStart");
+    minigame.start();
+    let isRight = minigame.check();
+    console.log(`isRight: ${isRight}`);
+    if (isRight) {
         
     }
-
-    play_rotate_sound() {
-
-    }
-
-    play_discharge_sound() {
-
-    }
-
-    rotate() {
-
-    }
-
-    discharge() {
-
-    }
-
-
     
-}
+    gacha.rotate();
 
-class Item {
-    constructor() {
-        this.image = null;
-        this.name = null;
-        this.rarity = Rarity();
-    }
+    gacha.discharge();
 
-    get() {
-        return this
-    }
 
-}
-
-class MiniGame {
-    constructor() {
-        this.quiz = ["",""];
-        this.awnsor = "";
-    }
-
-    start(params) {
-        
-    }
-
-    check(index) {
-        return this.quiz[index] == this.awnsor;
-
-    }
-}
-
-class Rarity {
-    constructor() {
-        this.rarity = 0;
-        this.probability = 0.0;
-        this.up_probability = 0.0;
-    }
-
-    get() {
-        return this
-    }
-
-    set(_this) {
-        this = _this
-        return true
-    }
-    
 }
 
