@@ -13,11 +13,35 @@ class Gacha {
     constructor() {
         this.money_class = Money();
         this.rotate_sound = null;
-        this.exhaust_sound = null;
+        this.discharge_sound = null;
         this.rarity_list = null;
         this.design = null;
         this.items = [Item(),Item(),Item(),Item()];
     }
+
+    
+    change_design() {
+        
+    }
+
+    play_rotate_sound() {
+
+    }
+
+    play_discharge_sound() {
+
+    }
+
+    rotate() {
+
+    }
+
+    discharge() {
+
+    }
+
+
+    
 }
 
 class Item {
