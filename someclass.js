@@ -54,11 +54,15 @@ class Gacha {
 
             item.width = "" + 100 * i;
             if (i > 3) {
+
+                
                 clearInterval(task);
             }
 
             i++;
         },1000);
+
+
 
     }
 }
