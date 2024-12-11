@@ -3,10 +3,27 @@
     <link rel="stylesheet" type="text/css" href="main.css" />
 
     <bod>
-        
-          
-        
+        <h1>管理者画面&emsp;
+		    <button onclick="location.href='./index.html'">管理者画面終了</button>
+	    <h1>
 
+        <button onclick="Money.check()">現金回収</button>
+            
+        <select name="アイテム変更">
+	        <option>アイテム1</option>
+	        <option>アイテム2</option>
+	        <option>アイテム3</option>
+	    </select>
+	    <br>
+
+	    <select name="デザイン変更">
+	        <option value = "Gacha.change_design(1)">デザイン1</option>
+	        <option value = "Gacha.change_design(2)">デザイン2</option>
+	        <option value = "Gacha.change_design(3)">デザイン3</option>
+	    </select>
+            
+        <input type="text" placeholder="確率を入力してください" /></input>
+            
         <script src="someclass.js"></script>
         <script src="main.js"></script>
     </bod>
