@@ -5,3 +5,11 @@
 .image-container.rotated {
     transform: rotate(360deg); /* 360度回転 */
 }
+
+.relative {
+    position: relative;
+  }
+  .absolute {
+    position: absolute;
+    
+  }

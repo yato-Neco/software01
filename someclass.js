@@ -85,13 +85,14 @@ class MiniGame {
     awnsor;
 
     constructor() {
-        this.quiz = ["",""];
+        this.quiz = "";
+        this.choices = ["",""]
         this.response = "";
         this.awnsor = "";
     }
 
     start() {
-        this.response = window.prompt(`${this.quiz[0],this.quiz[1]}`);
+        this.response = window.prompt(`${this.choices[0]} \n ${this.choices[0]} or ${this.choices[1]}`);
     }
 
     check() {
