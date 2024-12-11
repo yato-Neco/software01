@@ -5,6 +5,7 @@ class Money {
     }
 
     check() {
+        window.alert(this.money,'回収');
         return this.money
     }
 }
