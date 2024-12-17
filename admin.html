@@ -7,26 +7,32 @@
 		    <button onclick="location.href='./index.html'">管理者画面終了</button>
 	    <h1>
         
-          <button onclick="Test1()">Test1</button>
-        
-            
-        <button onclick="gacha.money_class.pull()">現金回収</button>
-            
-        <select name="アイテム変更">
-	        <option>アイテム1</option>
-	        <option>アイテム2</option>
-	        <option>アイテム3</option>
-	    </select>
-	    <br>
 
-	    <select name="デザイン変更">
-	        <option>デザイン1</option>
-	        <option>デザイン2</option>
-	        <option>デザイン3</option>
+        <button onclick="gacha.money_class.pull('money')">現金回収</button>
+		<button onclick="gacha.money_class.check('money')">現金確認</button>
+		<p id="money"></p>
+            
+      
+
+	    <select name="デザイン変更" id="change_design">
+	        <option value="0">デザイン1</option>
+	        <option value="1">デザイン2</option>
+	        <option value="2">デザイン3</option>
 	    </select>
-            
-        <input type="text" placeholder="確率を入力してください" /></input>
-            
+		<button onclick="gacha.change_design()">確定</button>
+
+
+		<br>
+
+		<select name="アイテム変更"  id="mySelect">
+	        <option value="0">アイテム1</option>
+	        <option value="1">アイテム2</option>
+	        <option value="2">アイテム3</option>
+	    </select>
+	  
+        <input id="Inputprobability" type="text" placeholder="確率を入力してください" /></input>
+		<button onclick="gacha.change_item()">確定</button>
+
         <script src="someclass.js"></script>
         <script src="main.js"></script>
     </bod>

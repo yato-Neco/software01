@@ -1,15 +1,18 @@
 .image-container {
-    display: inline-block;
-    transition: transform 0.5s ease; /* 回転のアニメーション */
+  display: inline-block;
+  transition: transform 0.5s ease; /* 回転のアニメーション */
 }
 .image-container.rotated {
-    transform: rotate(360deg); /* 360度回転 */
+  transform: rotate(360deg); /* 360度回転 */
 }
 
 .relative {
-    position: relative;
-  }
-  .absolute {
-    position: absolute;
-    
-  }
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+
+.color-changed {
+  filter: grayscale(100%) sepia(100%) hue-rotate(180deg);
+}
