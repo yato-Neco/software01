@@ -116,7 +116,6 @@ class Gacha {
             item.width = "0"
         });
         
-    
         
         const rand = Math.floor(Math.random() * 100);
         let result = "3";
