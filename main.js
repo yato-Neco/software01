@@ -16,6 +16,9 @@ function MiniGameStart() {
     gacha.discharge();
 }
 
+
+
+
 function Test0() {
     console.log(localStorage.getItem("name"));
 }

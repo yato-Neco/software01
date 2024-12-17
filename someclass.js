@@ -5,8 +5,15 @@ class Money {
     }
 
     check() {
-        return this.money
+        return localStorage.getItem("money");
     }
+
+    pull() {
+        console.log("お金を引き出しました");
+        localStorage.setItem("money", `${0}`);
+        this.money = 0;
+    }
+
 }
 
 class Gacha {
@@ -87,7 +94,7 @@ class Gacha {
             if (i > 3) {
                 
                 document.getElementById("");
-                
+
                 gacha.play_discharge_sound();
 
 
@@ -112,8 +119,7 @@ class Item {
     constructor(rarity) {
         this.image = null;
         this._name = null;
-        this.rarity = rarity;
-        
+        this.rarity = rarity;   
     }
 
     set_image(image) {
