@@ -41,8 +41,8 @@ class Gacha {
         this.rotate_sound = rotate_sound;
         this.discharge_sound = discharge_sound;
 
-        let r0 = new Rarity(0,0.05,"SSR");
-        let r1 = new Rarity(1,0.15,"SR");
+        let r0 = new Rarity(0,0.1,"SR");
+        let r1 = new Rarity(1,0.1,"SR");
         let r2 = new Rarity(2,0.2,"R");
         let r3 = new Rarity(3,0.2,"R");
 
@@ -110,6 +110,7 @@ class Gacha {
         const okButton = document.querySelector('#myDialog .button.ok');
         const ItemName = document.getElementById("showItemName");
         const ItemImage = document.getElementById("showItemImage");
+        const Rarity = document.getElementById("rarity");
 
         okButton.addEventListener('click', function () {
             dialog.close();
@@ -150,6 +151,8 @@ class Gacha {
                 const ditem = this.items[parseInt(result)]
                 ItemName.innerText = ditem.get_name()
                 ItemImage.src = ditem.get_image()
+                Rarity.innerText = "レアリティ: " + this.rarity_list[result].get_rarity();
+
 
                
                 for (const prop in this.rarity_list) {
@@ -219,7 +222,7 @@ class Item {
     }
     
     get_rarity() {
-        return this.rarity
+        return this.rarity.get_rarity()
     }
 }
 
@@ -289,6 +292,9 @@ class Rarity {
         //console.log(parseFloat(localStorage.getItem(`rarity${index}_probability`)))
     }
 
+    get_rarity() {
+        return this.rarity
+    }
    
 }
 
