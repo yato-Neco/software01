@@ -25,7 +25,11 @@ class Money {
         }
     }
 
-    
+    push(money) {
+        console.log("お金を受け取りました");
+        localStorage.setItem("money", `${money + this.input_money}`);
+
+    }
 
 }
 
@@ -41,19 +45,17 @@ class Gacha {
         this.rotate_sound = rotate_sound;
         this.discharge_sound = discharge_sound;
 
-        let r0 = new Rarity(0,0.1,"SR");
-        let r1 = new Rarity(1,0.1,"SR");
+        let r0 = new Rarity(0,0.1,"R");
+        let r1 = new Rarity(1,0.1,"R");
         let r2 = new Rarity(2,0.2,"R");
-        let r3 = new Rarity(3,0.2,"R");
+        let r3 = new Rarity(3,0.2,"N");
+        let r5 = new Rarity(3,0.2,"N");
+        let r6 = new Rarity(3,0.2,"N");
+        let r7 = new Rarity(3,0.2,"N");
+        let r8 = new Rarity(3,0.2,"N");
+        let r9 = new Rarity(3,0.2,"N");
 
-        this.rarity_list = {
-            "0": r0,
-            "1": r1,
-            "2": r2,
-            "3": r3,
-        };
-        
-        this.rarity_list = [r0,r1,r2,r3]
+
     
         this.items = [new Item(r0,0),new Item(r1,1),new Item(r2,2),new Item(r3,3)];
 
@@ -71,7 +73,8 @@ class Gacha {
 
     start() {
         let money = parseInt(this.money_class.check());
-        localStorage.setItem("money", `${money + this.money_class.input_money}`);
+        //localStorage.setItem("money", `${money + this.money_class.input_money}`);
+        this.money_class.push(money);
         console.log(`ガチャ内金額 ${money + this.money_class.input_money}`);
     }
     
@@ -83,9 +86,6 @@ class Gacha {
 
     }
 
-    play_rotate_sound() {
-        
-    }
 
     play_discharge_sound() {
         let sound = document.getElementById("discharge");
@@ -121,8 +121,8 @@ class Gacha {
         const rand = Math.floor(Math.random() * 100);
         let result = "3";
         let rate = 0;
-        for (const prop in this.rarity_list) {
-            rate += this.rarity_list[prop].get_probability(parseInt(prop)) * 100;
+        for (const prop in this.items) {
+            rate += this.items[prop].rarity.get_probability(parseInt(prop)) * 100;
             if (rand <= rate) {
                 result = prop;
                 break;
@@ -131,10 +131,6 @@ class Gacha {
 
         console.log(`result: ${result}`);
         
-
-        
-
-
         
         task = setInterval(() => {
             //console.log(`item zoom: ${i}`);
@@ -151,12 +147,10 @@ class Gacha {
                 const ditem = this.items[parseInt(result)]
                 ItemName.innerText = ditem.get_name()
                 ItemImage.src = ditem.get_image()
-                Rarity.innerText = "レアリティ: " + this.rarity_list[result].get_rarity();
+                Rarity.innerText = "レアリティ: " +  this.items[result].rarity.get_rarity();
 
-
-               
-                for (const prop in this.rarity_list) {
-                    this.rarity_list[prop].rest_probability(parseInt(prop),1.0)
+                for (const prop in this.items) {
+                    this.items[prop].rarity.rest_probability(parseInt(prop),1.0)
                 }
                 clearInterval(task);
             }
@@ -168,14 +162,18 @@ class Gacha {
 
         
     }
+    
+    play_rotate_sound() {
+        
+    }
 
 
     up_rarity(up_probability) {
 
-        for (let i = 0; i < this.rarity_list.length; i++) {
-            if (this.rarity_list[i].rarity != "R") {
-                const up = this.rarity_list[i].get_probability(i) * up_probability
-                this.rarity_list[i].set_probability(i,up)
+        for (let i = 0; i < this.items.length; i++) {
+            if (this.items[i].rarity != "R") {
+                const up = this.items[i].rarity.get_probability(i) * up_probability
+                this.items[i].rarity.set_probability(i,up)
             }
         }
     }
@@ -189,13 +187,10 @@ class Gacha {
 
         if (inputValue.trim() !== "" && inputValue !== null && inputValue !== undefined && !isNaN(inputValue)) {
 
-            this.rarity_list[selectedValue].set_read_probability(parseInt(selectedValue),parseFloat(inputValue))
+            this.items[selectedValue].rarity.set_read_probability(parseInt(selectedValue),parseFloat(inputValue))
         
-            console.log(this.rarity_list[selectedValue].get_probability(0))
-        }
-
-     
-        
+            console.log(this.items[selectedValue].rarity.get_probability(0))
+        }    
     }
 }
 
