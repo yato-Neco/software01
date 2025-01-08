@@ -73,9 +73,7 @@ class Gacha {
 
     start() {
         let money = parseInt(this.money_class.check());
-        //localStorage.setItem("money", `${money + this.money_class.input_money}`);
         this.money_class.push(money);
-        console.log(`ガチャ内金額 ${money + this.money_class.input_money}`);
 
 
         minigame.start();
@@ -85,38 +83,7 @@ class Gacha {
             this.up_rarity(12.0)
         }
     
-        this.discharge();
-
-    }
-    
-    change_design() {
-       
-        const select = document.getElementById('change_design');
-        console.log(select.value)
-        localStorage.setItem(`design`, `${select.value}`)
-
-    }
-
-
-    play_discharge_sound() {
-        let sound = document.getElementById("discharge");
-        sound.play();
-    }
-
-    rotate() {
-
-
-
-        gacha.play_rotate_sound();
-
-        const gachaImage = document.getElementById('gachagacha');
-
-        gachaImage.classList.toggle('rotated');
-    }
-
-    discharge() {
-
-           
+             
         this.rotate();
 
         let item = document.getElementById("item");
@@ -175,10 +142,35 @@ class Gacha {
             i++;
         },1000);
 
-        
 
-        
     }
+    
+    change_design() {
+       
+        const select = document.getElementById('change_design');
+        console.log(select.value)
+        localStorage.setItem(`design`, `${select.value}`)
+
+    }
+
+
+    play_discharge_sound() {
+        let sound = document.getElementById("discharge");
+        sound.play();
+    }
+
+    rotate() {
+
+
+
+        gacha.play_rotate_sound();
+
+        const gachaImage = document.getElementById('gachagacha');
+
+        gachaImage.classList.toggle('rotated');
+    }
+
+
     
     play_rotate_sound() {
         
@@ -188,7 +180,7 @@ class Gacha {
     up_rarity(up_probability) {
 
         for (let i = 0; i < this.items.length; i++) {
-            if (this.items[i].rarity != "R") {
+            if (this.items[i].rarity != "N") {
                 const up = this.items[i].rarity.get_probability(i) * up_probability
                 this.items[i].rarity.set_probability(i,up)
             }
