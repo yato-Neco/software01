@@ -76,6 +76,17 @@ class Gacha {
         //localStorage.setItem("money", `${money + this.money_class.input_money}`);
         this.money_class.push(money);
         console.log(`ガチャ内金額 ${money + this.money_class.input_money}`);
+
+
+        minigame.start();
+        let isRight = minigame.check();
+        console.log(`isRight: ${isRight}`);
+        if (isRight) {
+            this.up_rarity(12.0)
+        }
+    
+        this.discharge();
+
     }
     
     change_design() {
@@ -93,6 +104,9 @@ class Gacha {
     }
 
     rotate() {
+
+
+
         gacha.play_rotate_sound();
 
         const gachaImage = document.getElementById('gachagacha');
@@ -101,6 +115,9 @@ class Gacha {
     }
 
     discharge() {
+
+           
+        this.rotate();
 
         let item = document.getElementById("item");
         item.src = "./image/capsule_close1_red.png";
