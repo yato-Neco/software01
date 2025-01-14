@@ -38,6 +38,7 @@ class Gacha {
         "position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; filter: hue-rotate(90deg);",
         "position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; filter: hue-rotate(180deg);",
     ];
+    items = []
     constructor(rotate_sound, discharge_sound) {
         this.money_class = new Money();
         this.rotate_sound = rotate_sound;
@@ -47,14 +48,14 @@ class Gacha {
         let r1 = new Rarity(1, 0.1, "R");
         let r2 = new Rarity(2, 0.2, "R");
         let r3 = new Rarity(3, 0.2, "N");
-        let r4 = new Rarity(3, 0.2, "N");
-        let r5 = new Rarity(3, 0.2, "N");
-        let r6 = new Rarity(3, 0.2, "N");
-        let r7 = new Rarity(3, 0.2, "N");
-        let r8 = new Rarity(3, 0.2, "N");
-        let r9 = new Rarity(3, 0.2, "N");
+        let r4 = new Rarity(4, 0.2, "N");
+        let r5 = new Rarity(5, 0.2, "N");
+        let r6 = new Rarity(6, 0.2, "N");
+        let r7 = new Rarity(7, 0.2, "N");
+        let r8 = new Rarity(8, 0.2, "N");
+        let r9 = new Rarity(9, 0.2, "N");
 
-        this.items = [
+        const items = [
             new Item(r0, 0),
             new Item(r1, 1),
             new Item(r2, 2),
@@ -67,6 +68,8 @@ class Gacha {
             new Item(r9, 9),
         ];
 
+        this.items = items;
+
         const designIndex = localStorage.getItem("design");
         if (designIndex == null) {
             localStorage.setItem("design", `${0}`);
@@ -78,6 +81,33 @@ class Gacha {
                 this.designs[localStorage.getItem("design")],
             );
         }
+
+
+
+        var select = document.getElementById("mySelect");
+        if (select != null) {
+
+            var options = document.querySelectorAll("#mySelect option");
+            const inputElement0 = document.getElementById("Itemname");
+            const inputElement1 = document.getElementById("Itemimg_url");
+            const inputElement = document.getElementById("Inputprobability");
+            inputElement.value = items[0].rarity.get_read_probability()
+            inputElement0.value = items[0].get_name()
+            inputElement1.value = items[0].get_image()
+            select.addEventListener('change', function(){
+            
+                    var index =  parseInt(this.selectedIndex);
+                 
+                    inputElement0.value = items[index].get_name()
+                    inputElement1.value = items[index].get_image()
+                    inputElement.value = items[index].rarity.get_read_probability()
+
+            
+            });
+        }
+       
+
+
     }
 
     start() {
@@ -176,7 +206,7 @@ class Gacha {
 
     up_rarity(up_probability) {
         for (let i = 0; i < this.items.length; i++) {
-            if (this.items[i].rarity != "N") {
+            if (this.items[i].get_rarity() != "N") {
                 const up = this.items[i].rarity.get_probability(i) *
                     up_probability;
                 this.items[i].rarity.set_probability(i, up);
@@ -184,7 +214,7 @@ class Gacha {
         }
     }
 
-    change_item() {
+    change_rarity() {
         const selectElement = document.getElementById("mySelect");
         const selectedValue = selectElement.value;
         const inputElement = document.getElementById("Inputprobability");
@@ -203,6 +233,29 @@ class Gacha {
             console.log(this.items[selectedValue].rarity.get_probability(0));
         }
     }
+
+    change_item() {
+        const selectElement = document.getElementById("mySelect");
+        const selectedValue = selectElement.value;
+        const inputElement0 = document.getElementById("Itemname");
+        const inputValue0 = inputElement0.value.trim();
+        const inputElement1 = document.getElementById("Itemimg_url");
+        const inputValue1 = inputElement1.value.trim();
+        console.log(inputValue0)
+        if (
+            inputValue0 !== "" || inputValue0 !== null || inputValue0 !== undefined 
+        ){
+            this.items[selectedValue].set_name(inputValue0)
+        }
+
+
+        if (
+            inputValue1 !== "" || inputValue1 !== null || inputValue1 !== undefined 
+        ){
+            this.items[selectedValue].set_image(inputValue1)
+        }
+
+    }
 }
 
 class Item {
@@ -211,12 +264,14 @@ class Item {
     constructor(rarity, index) {
         this.index = index;
         this.rarity = rarity;
-
-        localStorage.setItem(
-            `item${index}_image`,
-            "./image/onepiece01_luffy2.png",
-        );
-        localStorage.setItem(`item${index}_name`, "item" + index);
+        if (localStorage.getItem(`item${this.index}_name`) == null || localStorage.getItem(`item${this.index}_image`) == null) {
+            localStorage.setItem(
+                `item${index}_image`,
+                "./image/onepiece01_luffy2.png",
+            );
+            localStorage.setItem(`item${index}_name`, "item" + index);
+        }
+    
     }
 
     get_name() {
@@ -230,6 +285,14 @@ class Item {
     get_rarity() {
         return this.rarity.get_rarity();
     }
+
+    set_image(img_url) {
+        localStorage.setItem(`item${this.index}_image`, `${img_url}`);
+    }
+
+    set_name(name) {
+        localStorage.setItem(`item${this.index}_name`, `${name}`);
+    }
 }
 
 class MiniGame {
@@ -238,15 +301,15 @@ class MiniGame {
     awnsor;
 
     constructor() {
-        this.quiz = "0 or 1";
-        this.choices = ["0", "1"];
+        this.quiz = "糸山英太郎の座右の銘は何ですか？";
+        this.choices = ["石の上にも三年", "金こそ力"];
         this.response = "";
-        this.awnsor = "0";
+        this.awnsor = "金こそ力";
     }
 
     start() {
         this.response = window.prompt(
-            `${this.choices[0]} \n ${this.choices[0]} or ${this.choices[1]}`,
+            `${this.quiz} \n ${this.choices[0]} or ${this.choices[1]}`,
         );
     }
 
@@ -296,6 +359,32 @@ class Rarity {
         }
     }
 
+    get_rarity() {
+        return this.rarity;
+    }
+
+
+    get_probability(index) {
+        //console.log(parseFloat(localStorage.getItem(`rarity${index}_probability`)))
+        return parseFloat(localStorage.getItem(`rarity${index}_probability`));
+    }
+
+    set_probability(index, probability) {
+        localStorage.setItem(`rarity${index}_probability`, `${probability}`);
+        //console.log(parseFloat(localStorage.getItem(`rarity${index}_probability`)))
+    }
+
+
+
+
+
+
+
+
+
+
+
+    
     rest_probability(index, probability) {
         localStorage.setItem(
             `rarity${index}_probability`,
@@ -315,17 +404,8 @@ class Rarity {
         localStorage.setItem(`rarity${index}_probability`, `${probability}`);
     }
 
-    get_probability(index) {
-        //console.log(parseFloat(localStorage.getItem(`rarity${index}_probability`)))
-        return parseFloat(localStorage.getItem(`rarity${index}_probability`));
+    get_read_probability() {
+        return parseFloat(localStorage.getItem(`rarity${this.index}_readonly_probability`));
     }
-
-    set_probability(index, probability) {
-        localStorage.setItem(`rarity${index}_probability`, `${probability}`);
-        //console.log(parseFloat(localStorage.getItem(`rarity${index}_probability`)))
-    }
-
-    get_rarity() {
-        return this.rarity;
-    }
+ 
 }

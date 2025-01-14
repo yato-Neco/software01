@@ -12,33 +12,45 @@
 		<button onclick="gacha.money_class.check('money')">現金確認</button>
 		<p id="money"></p>
             
-      
+		<div style="overflow: hidden;">
 
-	    <select name="デザイン変更" id="change_design">
-	        <option value="0">デザイン1</option>
-	        <option value="1">デザイン2</option>
-	        <option value="2">デザイン3</option>
-	    </select>
-		<button onclick="gacha.change_design()">確定</button>
-
-
-		<br>
-
-		<select name="アイテム変更"  id="mySelect">
-	        <option value="0">アイテム1</option>
-	        <option value="1">アイテム2</option>
-	        <option value="2">アイテム3</option>
-			<option value="3">アイテム4</option>
-			<option value="4">アイテム5</option>
-	        <option value="5">アイテム6</option>
-	        <option value="6">アイテム7</option>
-	        <option value="7">アイテム8</option>
-	        <option value="8">アイテム9</option>
-	        <option value="9">アイテム10</option>
-	    </select>
+			<div style="float: left; padding : 20px ;">
+				<select name="デザイン変更" id="change_design">
+					<option value="0">デザイン1</option>
+					<option value="1">デザイン2</option>
+					<option value="2">デザイン3</option>
+				</select>
+				<br>
+				<button onclick="gacha.change_design()">確定</button>
+			</div>
 	  
-        <input id="Inputprobability" type="text" placeholder="確率を入力してください" /></input>
-		<button onclick="gacha.change_item()">確定</button>
+
+
+		<div style="overflow: hidden; padding : 20px ;">
+
+			<select name="アイテム変更"  id="mySelect">
+				<option value="0">アイテム1</option>
+				<option value="1">アイテム2</option>
+				<option value="2">アイテム3</option>
+				<option value="3">アイテム4</option>
+				<option value="4">アイテム5</option>
+				<option value="5">アイテム6</option>
+				<option value="6">アイテム7</option>
+				<option value="7">アイテム8</option>
+				<option value="8">アイテム9</option>
+				<option value="9">アイテム10</option>
+			</select>
+
+			<input id="Itemname" type="text" placeholder="名前" /></input>
+			<input id="Itemimg_url" type="text" placeholder="画像" /></input>
+
+			<br>
+			<input id="Inputprobability" type="text" placeholder="確率を入力してください" /></input>
+			<button onclick="gacha.change_item()">確定</button>
+	
+		</div>
+		</div>
+      
 
         <script src="someclass.js"></script>
         <script src="main.js"></script>
