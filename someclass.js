@@ -301,10 +301,10 @@ class MiniGame {
     awnsor;
 
     constructor() {
-        this.quiz = "糸山英太郎の座右の銘は何ですか？";
-        this.choices = ["石の上にも三年", "金こそ力"];
+        this.quiz = "糸山英太郎の座右の銘は「金こそ力」ですか";
+        this.choices = ["Yes", "No"];
         this.response = "";
-        this.awnsor = "金こそ力";
+        this.awnsor = "Yes";
     }
 
     start() {
